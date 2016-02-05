@@ -49,6 +49,116 @@ int yylex() {
     }
   }
 
+  if (!strcmp(lexeme, "if")) {
+    return TOK_IF;
+  }
+  if (!strcmp(lexeme, "else")) {
+    return TOK_ELSE;
+  }
+  if (!strcmp(lexeme, "for")) {
+    return TOK_FOR;
+  }
+  if (!strcmp(lexeme, "while")) {
+    return TOK_WHILE;
+  }
+  if (!strcmp(lexeme, "print")) {
+    return TOK_PRINT;
+  }
+  if (!strcmp(lexeme, "return")) {
+    return TOK_RETURN;
+  }
+  if (!strcmp(lexeme, "continue")) {
+    return TOK_CONTINUE;
+  }
+  if (!strcmp(lexeme, "break")) {
+    return TOK_BREAK;
+  }
+  if (!strcmp(lexeme, "debug")) {
+    return TOK_DEBUG;
+  }
+  if (!strcmp(lexeme, "read")) {
+    return TOK_READ;
+  }
+  if (!strcmp(lexeme, "let")) {
+    return TOK_LET;
+  }
+  if (!strcmp(lexeme, "int")) {
+    return TOK_INT;
+  }
+  if (!strcmp(lexeme, "float")) {
+    return TOK_FLOAT;
+  }
+  if (!strcmp(lexeme, "string")) {
+    return TOK_STRING;
+  }
+  if (!strcmp(lexeme, ";")) {
+    return TOK_SEMICOLON;
+  }
+  if (!strcmp(lexeme, "(")) {
+    return TOK_OPENPAREN;
+  }
+  if (!strcmp(lexeme, ")")) {
+    return TOK_CLOSEPAREN;
+  }
+  if (!strcmp(lexeme, "[")) {
+    return TOK_OPENBRACE;
+  }
+  if (!strcmp(lexeme, "]")) {
+    return TOK_CLOSEBRACE;
+  }
+  if (!strcmp(lexeme, "{")) {
+    return TOK_OPENBRACKET;
+  }
+  if (!strcmp(lexeme, "}")) {
+    return TOK_CLOSEBRACKET;
+  }
+  if (!strcmp(lexeme, ",")) {
+    return TOK_COMMA;
+  }
+  if (!strcmp(lexeme, "+")) {
+    return TOK_PLUS;
+  }
+  if (!strcmp(lexeme, "-")) {
+    return TOK_MINUS;
+  }
+  if (!strcmp(lexeme, "*")) {
+    return TOK_MULTIPLY;
+  }
+  if (!strcmp(lexeme, "/")) {
+    return TOK_DIVIDE;
+  }
+  if (!strcmp(lexeme, "=")) {
+    return TOK_ASSIGN;
+  }
+  if (!strcmp(lexeme, "==")) {
+    return TOK_EQUALTO;
+  }
+  if (!strcmp(lexeme, "<")) {
+    return TOK_LESSTHAN;
+  }
+  if (!strcmp(lexeme, ">")) {
+    return TOK_GREATERTHAN;
+  }
+  if (!strcmp(lexeme, "<>")) {
+    return TOK_NOTEQUALTO;
+  }
+  if (!strcmp(lexeme, "and")) {
+    return TOK_AND;
+  }
+  if (!strcmp(lexeme, "or")) {
+    return TOK_OR;
+  }
+  if (!strcmp(lexeme, "not")) {
+    return TOK_NOT;
+  }
+  if (!strcmp(lexeme, "length")) {
+    return TOK_LENGTH;
+  }
+
+  // for (int i = 0; i < yyleng; i++) {
+  // 
+  // }
+
   // We don't yet know how to recognize any lexemes
   return TOK_UNKNOWN;
 }
