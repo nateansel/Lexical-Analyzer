@@ -154,11 +154,64 @@ int yylex() {
   if (!strcmp(lexeme, "length")) {
     return TOK_LENGTH;
   }
+  if (isalpha(lexeme[0])) {
+    bool isIdent = true;
+    for (int i = 1; i < yyleng; i++) {
+      if (!(isalpha(lexeme[i]) || isdigit(lexeme[i]) || lexeme[i] == '_')) {
+        isIdent = false;
+        break;
+      }
+    }
+    if (isIdent) {
+      return TOK_IDENTIFIER;
+    }
+  }
+  if (isdigit(lexeme[0])) {
+    bool isDigit = true;
+    for (int i = 1; i < yyleng; i++) {
+      if (!isdigit(lexeme[i])) {
+        isDigit = false;
+        break;
+      }
+    }
+    if (isDigit) {
+      return TOK_INT;
+    }
+  }
+  if (isdigit(lexeme[0])) {
+    bool isFloat = true;
+    int i;
+    for (i = 1; i < yyleng; i++) {
+      if (!isdigit(lexeme[i])) {
+        if (lexeme[i] != '.') {
+          isFloat = false;
+          break;
+        }
+        else {
+          i++;
+          break;
+        }
+      }
+    }
+    for (i = i; i < yyleng; i++) {
+      if (!isdigit(lexeme[i])) {
+        isFloat = false;
+        break;
+      }
+    }
+    if (isFloat) {
+      return TOK_FLOATLIT;
+    }
+  }
+  if (lexeme[0] == '"') {
+    if (lexeme[yyleng - 1] == '"') {
+      return TOK_STRINGLIT;
+    }
+    else if (feof(lexeme[yyleng - 1])) {
+      return TOK_EOF_SL;
+    }
+  }
 
-  // for (int i = 0; i < yyleng; i++) {
-  // 
-  // }
-
-  // We don't yet know how to recognize any lexemes
+  // If you get here it must be something we don't know how to recognize.
   return TOK_UNKNOWN;
 }
