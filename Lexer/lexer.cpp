@@ -7,7 +7,6 @@
 //
 
 #include "lexer.h"
-#include <ctype.h>
 
 
 char lexeme[MAX_LEXEME_LEN];  // Character buffer for lexeme
@@ -15,6 +14,7 @@ char lexeme[MAX_LEXEME_LEN];  // Character buffer for lexeme
 int yylex() {
   static char c = -1;         // Have we read the first character yet?
   int char_type;              // Hold the character type
+  bool string = false;
 
   // Prepare the buffer to hold the lexeme
   for (int i = 0; i < MAX_LEXEME_LEN; i++) {
@@ -37,16 +37,43 @@ int yylex() {
   }
 
   // Store current character and read the next
+  if (isspace(c)) {
+    c = fgetc(yyin);
+  }
+  if (feof(yyin)) {
+    c = -1;
+    return TOK_EOF;
+  }
   lexeme[yyleng++] = c;
   c = fgetc(yyin);
-  while (!isspace(c)) {
-    // this isn't the end of the lexeme
+
+  if (lexeme[0] == '"') {
     lexeme[yyleng++] = c;
     c = fgetc(yyin);
-    // Check if the next character is an EOF
-    if (feof(c)) {
-      c = -1;
+    while (c != '"') {
+      if (feof(yyin)) {
+        c = -1;
+        break;
+      }
+      lexeme[yyleng++] = c;
+      c = fgetc(yyin);
     }
+    lexeme[yyleng++] = c;
+    c = fgetc(yyin);
+  }
+  else {
+    while (!isspace(c)) {
+      // this isn't the end of the lexeme
+      lexeme[yyleng++] = c;
+      c = fgetc(yyin);
+      // Check if this character is an EOF
+      if (feof(yyin)) {
+        c = -1;
+      }
+    }
+  }
+  if (feof(yyin)) {
+    c = -1;
   }
 
   if (!strcmp(lexeme, "if")) {
@@ -207,7 +234,7 @@ int yylex() {
     if (lexeme[yyleng - 1] == '"') {
       return TOK_STRINGLIT;
     }
-    else if (feof(lexeme[yyleng - 1])) {
+    else if (c == -1) {
       return TOK_EOF_SL;
     }
   }

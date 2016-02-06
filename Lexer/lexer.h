@@ -11,6 +11,9 @@
 
 // Include standard IO streams
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <locale.h>
 
 // The lexical analyzer global variables and functions
 extern int   yylex();
