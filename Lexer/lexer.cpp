@@ -154,7 +154,7 @@ int yylex() {
   if (!strcmp(lexeme, "/")) {
     return TOK_DIVIDE;
   }
-  if (!strcmp(lexeme, "=")) {
+  if (!strcmp(lexeme, ":=")) {
     return TOK_ASSIGN;
   }
   if (!strcmp(lexeme, "==")) {
