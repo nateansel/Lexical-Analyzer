@@ -55,7 +55,7 @@ extern char *yytext;       // text of current lexeme
 #define TOK_MINUS         3001  // -
 #define TOK_MULTIPLY      3002  // *
 #define TOK_DIVIDE        3003  // /
-#define TOK_ASSIGN        3004  // =
+#define TOK_ASSIGN        3004  // :=
 #define TOK_EQUALTO       3005  // ==
 #define TOK_LESSTHAN      3006  // <
 #define TOK_GREATERTHAN   3007  // >
